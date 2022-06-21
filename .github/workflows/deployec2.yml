@@ -17,7 +17,11 @@ jobs:
           aws-region: eu-west-1
 
       - name: Obtain public IP
-        run: wget -qO- https://ipecho.net/plain
+        run: |
+          echo 'IP_RUNNER<<EOF' >> $GITHUB_ENV
+          wget -qO- https://ipecho.net/plain >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
+          echo "Public IP Adr: ${{ env.IP_RUNNER }}"
 
       - name: Describe Instances
         run: aws ec2 describe-instances
