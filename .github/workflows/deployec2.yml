@@ -18,10 +18,9 @@ jobs:
 
       - name: Obtain public IP
         run: |
-          echo 'IP_RUNNER<<EOF' >> $GITHUB_ENV
-          wget -qO- https://ipecho.net/plain >> $GITHUB_ENV
-          echo 'EOF' >> $GITHUB_ENV
-          echo "Public IP Adr: ${{ env.IP_RUNNER }}"
+          $IP_RUNNER = `wget -qO- https://ipecho.net/plain`
+          echo "$IP_RUNNER"
+
 
       - name: Describe Instances
         run: aws ec2 describe-instances
