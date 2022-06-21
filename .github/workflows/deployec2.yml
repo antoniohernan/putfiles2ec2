@@ -17,10 +17,10 @@ jobs:
           aws-region: eu-west-1
 
       - name: Obtain public IP
-        run: |
-          $IP_RUNNER = `wget -qO- https://ipecho.net/plain`
-          echo "$IP_RUNNER"
+        run: $IP_RUNNER = `wget -qO- https://ipecho.net/plain`
 
+      - name: Show public IP
+        run: echo $IP_RUNNER
 
       - name: Describe Instances
         run: aws ec2 describe-instances
