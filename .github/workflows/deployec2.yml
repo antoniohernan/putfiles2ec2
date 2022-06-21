@@ -22,5 +22,8 @@ jobs:
         with: 
           run: wget -qO- https://ipecho.net/plain
 
+      - name: Print IP
+        run: echo Ip Publica: ${{ steps.IP_RUNNER.outputs.stdout }}
+
       - name: Describe Instances
         run: aws ec2 describe-instances
