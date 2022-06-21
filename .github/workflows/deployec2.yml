@@ -10,13 +10,14 @@ jobs:
     steps:
 
       - name: Configure AWS
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@05b148adc31e091bafbaf404f745055d4d3bc9d2
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-west-1
 
       - name: Obtain public IP
+        uses: mathiasvr/command-output@8dbf451add3db114df0114aa5e21a1efef8c5015
         id: IP_RUNNER
         with: 
           run: wget -qO- https://ipecho.net/plain
