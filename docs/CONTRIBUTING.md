@@ -31,7 +31,7 @@ Clon the repository from its URL with e.g. GitHub Desktop or GitBash
 
 ```
 git clone https://github.com/antoniohernan/putfiles2ec2.git
-Cloning into 'detect-asm-csp-framework'...
+Cloning into 'putfiles2ec2'...
 remote: Enumerating objects: 39, done.
 remote: Counting objects: 100% (39/39), done.
 remote: Compressing objects: 100% (38/38), done.
@@ -45,13 +45,7 @@ Resolving deltas: 100% (10/10), done.
 Creates a new working branch for your contribution from the main branch
 
 ```
-git branch <new-branch> main
-```
-
-e.g.
-
-```
-git branch develop-newapirequest main
+git checkout -b <new_branch_name> <specific_different_branch>
 ```
 
 Try to make the name of the new branch contain something to identify its purpose.
@@ -69,44 +63,13 @@ Counting objects: 100% (11/11), done.
 Delta compression using up to 4 threads
 Compressing objects: 100% (9/9), done.
 Writing objects: 100% (10/10), 3.15 KiB | 645.00 KiB/s, done.
-Total 10 (delta 0), reused 0 (delta 0), pack-reused 0
-remote:
-remote: Create a pull request for 'develop' on GitHub by visiting:
-remote:      https://github.com/santander-group-cyber-detect/detect-asm-csp-framework/pull/new/develop
-remote:
-To https://github.com/santander-group-cyber-detect/detect-asm-csp-framework.git
- * [new branch]      develop -> develop
-branch 'develop' set up to track 'origin/develop'.
+...
 ```
 
 ### Generating new Pull Request
 
-You can create the new Pull Request using the URL shown by the publish command of the new branch, e.g. `https://github.com/santander-group-cyber-detect/detect-asm-csp-framework/pull/new/develop`. This directly opens the pullrequest creation screen on the main branch from the current branch.
-
-Or you can create the new Pull Request from your browser by following these steps:
-
-- Click on Pull Requests
-
-<img src="/images/pullrequest_1.png" width="250"/><br>
-
-- Click on New pull request
-
-<img src="/images/pullrequest_2.png" width="250"/><br>
-
-- Select the branch you are going to merge with the main branch
-
-<img src="/images/pullrequest_3.png" width="450"/><br>
-
-- Validates that "Able to merge" is displayed and push Create pull request
-
-<img src="/images/pullrequest_4.png" width="450"/><br>
-
-- Write the pull request message and push Create
-
-<img src="/images/pullrequest_5.png" width="450"/><br>
-
+You can create the new Pull Request using the URL shown by the publish command of the new branch. 
 Pull Requests are carefully reviewed by the team in charge.
-
 Issues will be generated as necessary to correct any deficiencies before accepting the changes and proceeding to merge them into the main branch.
 
 
@@ -130,8 +93,6 @@ Trunk Based Development allow feature branches as a tool for code review, with s
 - Feature branches branch from the trunk and can only be merged to the trunk.
 - Merging from the feature branch to trunk is allowed only once and also means the end of the feature branch
 - Merging from trunk to bring the feature branch up to date with new changes is allowed anytime. It is especially recommended to bring your feature branch fully up to date with the trunk (and check that it builds) before actually merging into trunk
-
-<img src="/images/feature-branch.jpg" width="450"/><br>   
 
 
 ### Git Commit Messages
