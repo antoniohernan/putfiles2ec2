@@ -1,0 +1,8 @@
+- Show respect
+- Truly listen
+- Talk straight
+- Keep promises
+- Actively collaborate
+- Bring passion
+- Support people
+- Embrace change

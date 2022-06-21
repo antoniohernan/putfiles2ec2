@@ -1,0 +1,24 @@
+name: Sast
+
+on:
+  push
+
+jobs:
+  semgrep:
+    name: Scan
+    runs-on: ubuntu-latest
+    container:
+      image: returntocorp/semgrep:0.98.0
+    # Skip any PR created by dependabot to avoid permission issues
+    if: (github.actor != 'dependabot[bot]')
+    steps:
+      # Fetch project source
+      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+
+      - run: semgrep ci
+        env:
+          # Semgrep Rules
+          # https://github.com/returntocorp/semgrep-rules
+          SEMGREP_RULES: >-
+            p/security-audit
+            p/secrets
