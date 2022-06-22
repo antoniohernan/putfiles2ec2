@@ -21,7 +21,7 @@ jobs:
 
       - name: Obtain public IP
         run: |
-          IP_RUNNER = wget -qO- https://ipecho.net/plain 
+          IP_RUNNER=$(wget -qO- https://ipecho.net/plain)
           echo $IP_RUNNER
           echo $IP_RUNNER >> $GITHUB_ENV
 
