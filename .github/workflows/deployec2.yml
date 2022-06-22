@@ -1,13 +1,19 @@
 name: Deployec2
 
 on:
-  push
+  pull_request:
+    branches: [main]
+    type: [closed]
+    paths:
+    - 'data/**'
+    - '!.github/workflows/**' 
 
 env:
   IP_RUNNER: 0.0.0.0/0
 
 jobs:
   deploy:
+    if: github.event.pull_request.merged == true
     name: Deploy file to EC2
     runs-on: ubuntu-latest
     steps:
