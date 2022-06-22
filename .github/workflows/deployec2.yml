@@ -4,7 +4,7 @@ on:
   push
 
 env:
-  IP_TUNNER: 0.0.0.0/0
+  IP_RUNNER: 0.0.0.0/0
 
 jobs:
   deploy:
@@ -24,7 +24,7 @@ jobs:
           IP_RUNNER=$(wget -qO- https://ipecho.net/plain)
 
       - name: Print IP
-        run: echo $IP_RUNNER
+        run: echo ${{ env.IP_RUNNER }}
 
       - name: Describe Instances
         run: aws ec2 describe-instances
