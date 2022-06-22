@@ -37,5 +37,6 @@ jobs:
           
 
       - name: Revoke Access
+        if: always()
         run: aws ec2 revoke-security-group-ingress --group-id "${{ secrets.AWS_SGWEB }}" --protocol tcp --port 22 --cidr "${{ env.IP_RUNNER }}/32"
 
