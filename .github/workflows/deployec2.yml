@@ -20,7 +20,10 @@ jobs:
           aws-region: eu-west-1
 
       - name: Obtain public IP
-        run: $IP_RUNNER = wget -qO- https://ipecho.net/plain 
+        run: |
+          IP_RUNNER = wget -qO- https://ipecho.net/plain 
+          echo $IP_RUNNER
+          echo $IP_RUNNER >> $GITHUB_ENV
 
       - name: Print IP
         run: echo ${{ env.IP_RUNNER }}
