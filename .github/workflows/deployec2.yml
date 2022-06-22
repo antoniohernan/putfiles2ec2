@@ -25,5 +25,15 @@ jobs:
       - name: Authorize Access
         run: aws ec2 authorize-security-group-ingress --group-id "${{ secrets.AWS_SGWEB }}" --protocol tcp --port 22 --cidr "${{ env.IP_RUNNER }}/32"
 
-      - name: Describe Instances
-        run: aws ec2 describe-instances
+      - name: Prepare Runner
+        shell: bash
+        run: |
+          config_ssh=~/.ssh/config
+          keyfile=~/.ssh/Key.pem
+          mkdir ~/.ssh && echo -e "ExitOnForwardFailure=yes\nStrictHostKeyChecking=no" > ${config_ssh} && chmod 600 ${config_ssh} && echo "File created: ${config_ssh}"
+          echo ${{ secrets.AWS_KEY }} > ${keyfile} && chmod 600 ${keyfile} $$ echo "Configured key file: ${keyfile}"
+          
+
+      - name: Revoke Access
+        run: aws ec2 revoke-security-group-ingress --group-id "${{ secrets.AWS_SGWEB }}" --protocol tcp --port 22 --cidr "${{ env.IP_RUNNER }}/32"
+
