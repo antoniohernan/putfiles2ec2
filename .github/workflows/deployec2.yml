@@ -40,7 +40,7 @@ jobs:
         shell: bash
         run: |
           keyfile=~/.ssh/Key.pem
-          scp -i ${keyfile} ~/data/hello_world.html ${{ secrets.AWS_VMUSERNAME}@${{ secrets.DESTINATION }}:/tmp
+          scp -i ${keyfile} ~/data/hello_world.html ${{ secrets.AWS_VMUSERNAME}\@${{ secrets.DESTINATION }}:/tmp
 
       - name: Revoke Access
         if: always()
