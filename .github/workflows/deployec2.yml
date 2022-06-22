@@ -22,8 +22,8 @@ jobs:
       - name: Obtain public IP
         run: echo "IP_RUNNER=$(wget -qO- https://ipecho.net/plain)" >> $GITHUB_ENV
 
-      - name: Print IP
-        run: echo ${{ env.IP_RUNNER }}
+      - name: Authorize Access
+        run: aws ec2 authorize-security-group-ingress --group-id "${{ secrets.AWS_SGWEB }}" --protocol tcp --port 22 --cidr "${{ env.IP_RUNNER }}/32"
 
       - name: Describe Instances
         run: aws ec2 describe-instances
