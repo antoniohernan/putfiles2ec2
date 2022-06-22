@@ -3,6 +3,9 @@ name: Deployec2
 on:
   push
 
+env:
+  IP_TUNNER: 0.0.0.0/0
+
 jobs:
   deploy:
     name: Deploy file to EC2
@@ -17,13 +20,11 @@ jobs:
           aws-region: eu-west-1
 
       - name: Obtain public IP
-        uses: mathiasvr/command-output@8dbf451add3db114df0114aa5e21a1efef8c5015
-        id: IP_RUNNER
-        with: 
-          run: wget -qO- https://ipecho.net/plain
+        run: |
+          IP_RUNNER=$(wget -qO- https://ipecho.net/plain)
 
       - name: Print IP
-        run: ${{ steps.IP_RUNNER.outputs.stdout }}
+        run: echo $IP_RUNNER
 
       - name: Describe Instances
         run: aws ec2 describe-instances
