@@ -1,19 +1,13 @@
-name: Deployec2
+name: Deploy Ec2
 
 on:
-  pull_request:
-    branches: [main]
-    type: [closed]
-    paths:
-    - 'data/**'
-    - '!.github/workflows/**' 
+  push
 
 env:
-  IP_RUNNER: 0.0.0.0/0
+  IP_RUNNER: 192.168.1.1/32
 
 jobs:
   deploy:
-    if: github.event.pull_request.merged == true
     name: Deploy file to EC2
     runs-on: ubuntu-latest
     steps:
@@ -23,21 +17,20 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-west-1
+          aws-region: $${{ secrets.AWS_REGION }}
 
       - name: Obtain public IP
-        run: echo "IP_RUNNER=$(wget -qO- https://ipecho.net/plain)" >> $GITHUB_ENV
+        run: echo "IP_RUNNER=$(wget -qO- https://ipecho.net/plain)" >> $GITHUB_ENV ${{ secrets.TRASH }}
 
       - name: Authorize Access
-        run: aws ec2 authorize-security-group-ingress --group-id "${{ secrets.AWS_SGWEB }}" --protocol tcp --port 22 --cidr "${{ env.IP_RUNNER }}/32"
+        run: aws ec2 authorize-security-group-ingress --group-id "${{ secrets.AWS_SGWEB }}" --protocol tcp --port "${{ secrets.AWS_VMPORT }}" --cidr "${{ env.IP_RUNNER }}/32"
 
       - name: Prepare Runner
         shell: bash
         run: |
           config_ssh=~/.ssh/config
-          keyfile=~/.ssh/Key.pem
           mkdir ~/.ssh && echo -e "ExitOnForwardFailure=yes\nStrictHostKeyChecking=no" > ${config_ssh} && chmod 600 ${config_ssh} 
-          echo "${{ secrets.AWS_KEY }}" > ${keyfile} && chmod 600 ${keyfile} 
+          echo "${{ secrets.AWS_KEY }}" > "${{ secrets.AWS_VMKEYFILE }}" && chmod 600 "${{ secrets.AWS_VMKEYFILE }}"
 
       - name: Checkout
         uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
@@ -45,10 +38,10 @@ jobs:
       - name: Copy Files
         shell: bash
         run: |
-          keyfile=~/.ssh/Key.pem
-          scp -r -i ${keyfile} $GITHUB_WORKSPACE/data/* ${{ secrets.AWS_VMUSERNAME }}@${{ secrets.DESTINATION }}:/tmp 2>/dev/null
+          scp -r -i "${{ secrets.AWS_VMKEYFILE }}" $GITHUB_WORKSPACE/data/* ${{ secrets.AWS_VMUSERNAME }}@${{ secrets.AWS_VMFQDN }}:${{ secrets.AWS_DESTINATION}} 2>/dev/null
 
       - name: Revoke Access
         if: always()
-        run: aws ec2 revoke-security-group-ingress --group-id "${{ secrets.AWS_SGWEB }}" --protocol tcp --port 22 --cidr "${{ env.IP_RUNNER }}/32"
+        run: aws ec2 revoke-security-group-ingress --group-id "${{ secrets.AWS_SGWEB }}" --protocol tcp --port "${{ secrets.AWS_VMPORT }}" --cidr "${{ env.IP_RUNNER }}/32"
+
 
