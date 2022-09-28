@@ -17,7 +17,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: $${{ secrets.AWS_REGION }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Obtain public IP
         run: echo "IP_RUNNER=$(wget -qO- https://ipecho.net/plain)" >> $GITHUB_ENV ${{ secrets.TRASH }}
@@ -29,7 +29,7 @@ jobs:
         shell: bash
         run: |
           config_ssh=~/.ssh/config
-          mkdir ~/.ssh && echo -e "ExitOnForwardFailure=yes\nStrictHostKeyChecking=no" > ${config_ssh} && chmod 600 ${config_ssh} 
+          mkdir ~/.ssh && echo -e "ExitOnForwardFailure=yes\nStrictHostKeyChecking=no" > ${config_ssh} && chmod 600 ${config_ssh}
           echo "${{ secrets.AWS_KEY }}" > "${{ secrets.AWS_VMKEYFILE }}" && chmod 600 "${{ secrets.AWS_VMKEYFILE }}"
 
       - name: Checkout
@@ -43,5 +43,3 @@ jobs:
       - name: Revoke Access
         if: always()
         run: aws ec2 revoke-security-group-ingress --group-id "${{ secrets.AWS_SGWEB }}" --protocol tcp --port "${{ secrets.AWS_VMPORT }}" --cidr "${{ env.IP_RUNNER }}/32"
-
-
