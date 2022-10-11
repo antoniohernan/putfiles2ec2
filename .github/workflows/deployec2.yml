@@ -29,8 +29,9 @@ jobs:
         shell: bash
         run: |
           config_ssh=~/.ssh/config
+          keyfile=~/.ssh/Key.pem
           mkdir ~/.ssh && echo -e "ExitOnForwardFailure=yes\nStrictHostKeyChecking=no" > ${config_ssh} && chmod 600 ${config_ssh}
-          echo ${{ secrets.AWS_KEY }} > ${{ secrets.AWS_VMKEYFILE }} && chmod 600 ${{ secrets.AWS_VMKEYFILE }}
+          echo "${{ secrets.AWS_KEY }}" > ${keyfile} && chmod 600 ${keyfile}
 
       - name: Checkout
         uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
@@ -38,7 +39,7 @@ jobs:
       - name: Copy Files
         shell: bash
         run: |
-          scp -r -i "${{ secrets.AWS_VMKEYFILE }}" $GITHUB_WORKSPACE/data/* ${{ secrets.AWS_VMUSERNAME }}@${{ secrets.AWS_VMFQDN }}:${{ secrets.AWS_DESTINATION}} 2>/dev/null
+          scp -r -i ${keyfile} $GITHUB_WORKSPACE/data/* ${{ secrets.AWS_VMUSERNAME }}@${{ secrets.AWS_VMFQDN }}:${{ secrets.AWS_DESTINATION}} 2>/dev/null
 
       - name: Revoke Access
         if: always()
