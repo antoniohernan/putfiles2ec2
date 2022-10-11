@@ -40,7 +40,7 @@ jobs:
         shell: bash
         run: |
           keyfile=~/.ssh/Key.pem
-          scp -r -i ${keyfile} $GITHUB_WORKSPACE/data/* "${{ secrets.AWS_VMUSERNAME }}"@"${{ secrets.AWS_VMFQDN }}":"${{ secrets.AWS_DESTINATION }}" 
+          scp -r -i ${keyfile} $GITHUB_WORKSPACE/data/* "${{ secrets.AWS_VMUSERNAME }}"@"${{ secrets.AWS_VMFQDN }}":/Deployments
 
       - name: Revoke Access
         if: always()
