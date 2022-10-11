@@ -78,3 +78,12 @@ The steps performed by this action are:
 ## Todo
 
 EC2 instance file watcher under development
+
+## Known errors and warnings
+
+10/10/22 ```Node.js 12 actions are deprecated.```
+There is an open issue, waiting for resolution and new version, with V.1.7 the warning is still present.
+
+
+
+https://github.com/aws-actions/configure-aws-credentials/pull/413
