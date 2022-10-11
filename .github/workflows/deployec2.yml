@@ -39,6 +39,7 @@ jobs:
       - name: Copy Files
         shell: bash
         run: |
+          keyfile=~/.ssh/Key.pem
           scp -r -i ${keyfile} $GITHUB_WORKSPACE/data/* ${{ secrets.AWS_VMUSERNAME }}@${{ secrets.AWS_VMFQDN }}:${{ secrets.AWS_DESTINATION}} 2>/dev/null
 
       - name: Revoke Access
