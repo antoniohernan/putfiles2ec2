@@ -46,7 +46,7 @@ jobs:
           AWSVMFQDN: ${{ secrets.AWS_VMFQDN }}
         run: |
           keyfile=~/.ssh/Key.pem
-          scp -r -i ${keyfile} $GITHUB_WORKSPACE/data/* ${AWSVMUSERNAME}@${AWSVMFQDN}
+          scp -r -i ${keyfile} $GITHUB_WORKSPACE/data/* ${AWSVMUSERNAME}@${AWSVMFQDN}:${AWSDESTINATION}
 
       - name: Revoke Access
         if: always()
