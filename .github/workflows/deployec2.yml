@@ -27,11 +27,13 @@ jobs:
 
       - name: Prepare Runner
         shell: bash
+        env:
+          AWSKEY: ${{ secrets.AWS_KEY }}
         run: |
           config_ssh=~/.ssh/config
           keyfile=~/.ssh/Key.pem
           mkdir ~/.ssh && echo -e "ExitOnForwardFailure=yes\nStrictHostKeyChecking=no" > ${config_ssh} && chmod 600 ${config_ssh}
-          echo "${{ secrets.AWS_KEY }}" > ${keyfile} && chmod 600 ${keyfile}
+          echo "$AWSKEY" > ${keyfile} && chmod 600 ${keyfile}
 
       - name: Checkout
         uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
@@ -41,7 +43,7 @@ jobs:
         env:
           AWSDESTINATION: ${{ secrets.AWS_DESTINATION }}
           AWSVMUSERNAME: ${{ secrets.AWS_VMUSERNAME }}
-          AWSFQDN: ${{ secrets.AWS_VMFQDN }}
+          AWSVMFQDN: ${{ secrets.AWS_VMFQDN }}
         run: |
           keyfile=~/.ssh/Key.pem
           scp -r -i ${keyfile} $GITHUB_WORKSPACE/data/* "$AWSVMUSERNAME"@"$AWSVMFQDN":"$AWSDESTINATION"
