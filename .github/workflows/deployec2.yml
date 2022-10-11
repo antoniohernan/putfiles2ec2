@@ -49,6 +49,7 @@ jobs:
           echo ${AWSVMUSERNAME}
           echo ${AWSVMFQDN}
           scp -r -i ${keyfile} $GITHUB_WORKSPACE/data/* ${AWSVMUSERNAME}@${AWSVMFQDN}:${AWSDESTINATION}
+          ssh -i ${keyfile} ${AWSVMUSERNAME}@${AWSVMFQDN} "ls -l /"
 
       - name: Revoke Access
         if: always()
