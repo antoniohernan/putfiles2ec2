@@ -13,7 +13,7 @@ jobs:
     steps:
 
       - name: Configure AWS
-        uses: aws-actions/configure-aws-credentials@05b148adc31e091bafbaf404f745055d4d3bc9d2
+        uses: aws-actions/configure-aws-credentials@67fbcbb121271f7775d2e7715933280b06314838
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -46,7 +46,6 @@ jobs:
           AWSVMFQDN: ${{ secrets.AWS_VMFQDN }}
         run: |
           keyfile=~/.ssh/Key.pem
-          #scp -r -i ${keyfile} $GITHUB_WORKSPACE/data/* ${AWSVMUSERNAME}@${AWSVMFQDN}:${AWSDESTINATION}
           scp -r -i ${keyfile} $GITHUB_WORKSPACE/data/* ${AWSVMUSERNAME}@${AWSVMFQDN}
 
       - name: Revoke Access
