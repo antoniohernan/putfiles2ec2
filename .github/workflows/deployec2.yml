@@ -30,7 +30,7 @@ jobs:
         run: |
           config_ssh=~/.ssh/config
           mkdir ~/.ssh && echo -e "ExitOnForwardFailure=yes\nStrictHostKeyChecking=no" > ${config_ssh} && chmod 600 ${config_ssh}
-          echo "${{ secrets.AWS_KEY }}" > "${{ secrets.AWS_VMKEYFILE }}" && chmod 600 "${{ secrets.AWS_VMKEYFILE }}"
+          echo ${{ secrets.AWS_KEY }} > ${{ secrets.AWS_VMKEYFILE }} && chmod 600 ${{ secrets.AWS_VMKEYFILE }}
 
       - name: Checkout
         uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
