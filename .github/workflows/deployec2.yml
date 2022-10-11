@@ -44,8 +44,7 @@ jobs:
           AWSDESTINATION: "${{ secrets.AWS_DESTINATION }}"
           AWSVMUSERNAME: "${{ secrets.AWS_VMUSERNAME }}"
           AWSVMFQDN: "${{ secrets.AWS_VMFQDN }}"
-        run: |
-          echo $AWSVMUSENAME
+        run: echo $AWSVMUSENAME
 
       - name: Revoke Access
         if: always()
