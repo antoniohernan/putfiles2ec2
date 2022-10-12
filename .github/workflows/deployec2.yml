@@ -1,8 +1,9 @@
 name: Deploy Ec2
 
 on:
-  push
-    branches: [ main ]
+  push:
+    branches:
+      - main
     paths: 'data/**'
 
 env:
