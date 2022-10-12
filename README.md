@@ -3,7 +3,7 @@ Publish files to EC2 instance
 
 [![Sast](https://github.com/antoniohernan/putfiles2ec2/actions/workflows/sast.yml/badge.svg)](https://github.com/antoniohernan/putfiles2ec2/actions/workflows/sast.yml) [![Deployec2](https://github.com/antoniohernan/putfiles2ec2/actions/workflows/deployec2.yml/badge.svg)](https://github.com/antoniohernan/putfiles2ec2/actions/workflows/deployec2.yml)
 
-Action to deploy code on an EC2 instance.
+Action to deploy code/files on an EC2 instance.
 The action opens the SFTP connection to the public IP address of the runner running in the security group of the EC2 instance.
 
 Deposits the files in the configured path and closes the security group again, whether the data transfer exists or not.
@@ -83,7 +83,5 @@ EC2 instance file watcher under development
 
 10/10/22 ```Node.js 12 actions are deprecated.```
 There is an open issue, waiting for resolution and new version, with V.1.7 the warning is still present.
-
-
 
 https://github.com/aws-actions/configure-aws-credentials/pull/413
