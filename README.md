@@ -75,9 +75,40 @@ The steps performed by this action are:
 
 7. Revokes the access of the runner machine to the EC2 instance, whatever the status of all the previous steps.
 
-## Todo
+## EC2 Instance file watcher
 
-EC2 instance file watcher under development
+In order to copy the files deployed by the script in the AWS_DESTINATION secret, you can use your own adaptation of this script  `deployfiles_monitor.sh`:
+
+```
+#!/usr/bin/env bash
+
+user=www-data
+group=www-data
+origin=/Deployments
+target=/var/www/<virtualhost_documentroot>/
+
+# Check if another instance of script is running
+[[ $(lsof -t $0| wc -l) > 1 ]] && echo "At least one of $0 is running" && exit
+
+while true
+do
+	#Inotify Trigger
+	inotifywait -r --exclude "(swp|swx)"  -e close_write -t 300 ${origin}
+	cp -pr ${origin}/* ${target}
+	chown -R ${user}:${group} ${target}
+	sleep 30
+done
+```
+
+The process execute de inode notifier and wait 300 seconds looking for file changes/new files.
+
+You need to additionally configure the system crontab to restart the execution of the script every, for example, 10 minutes.
+
+```
+*/10 * * * * /root/Scripts/deployfiles_monitor.sh
+```
+
+This scripts has "Single run only" protection.
 
 ## Known errors and warnings
 
