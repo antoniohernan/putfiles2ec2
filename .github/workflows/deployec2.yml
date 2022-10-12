@@ -2,6 +2,8 @@ name: Deploy Ec2
 
 on:
   push
+    branches: [ main ]
+    paths: 'data/**'
 
 env:
   IP_RUNNER: 192.168.1.1/32
