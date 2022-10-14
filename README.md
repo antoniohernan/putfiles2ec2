@@ -116,3 +116,9 @@ This scripts has "Single run only" protection.
 There is an open issue, waiting for resolution and new version, with V.1.7 the warning is still present.
 
 https://github.com/aws-actions/configure-aws-credentials/pull/413
+
+
+## License
+The code is under **Creative Commons Attribution-ShareAlike 4.0 International Public License**, view the license at: https://github.com/antoniohernan/putfile2ec2/blob/main/LICENSE.txt
+
+![License](images/license.jpeg)
