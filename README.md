@@ -119,6 +119,6 @@ https://github.com/aws-actions/configure-aws-credentials/pull/413
 
 
 ## License
-The code is under **Creative Commons Attribution-ShareAlike 4.0 International Public License**, view the license at: https://github.com/antoniohernan/putfile2ec2/blob/main/LICENSE.txt
+The code is under **Creative Commons Attribution-ShareAlike 4.0 International Public License**, view the license at: https://github.com/antoniohernan/putfiles2ec2/blob/main/LICENSE.txt
 
 ![License](images/license.jpeg)
