@@ -8,6 +8,10 @@ The action opens the SFTP connection to the public IP address of the runner runn
 
 Deposits the files in the configured path and closes the security group again, whether the data transfer exists or not.
 
+## Diagram
+![Diagram](images/putfiles_diagram.png)
+
+
 ## Prerequisites
 
 - EC2 instance with elastic IP assigned or other mechanism that allows us to identify it by name
