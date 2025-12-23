@@ -39,7 +39,7 @@ jobs:
           echo "${AWSKEY}" > ${keyfile} && chmod 600 ${keyfile}
 
       - name: Checkout
-        uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
 
       - name: Copy Files
         shell: bash
