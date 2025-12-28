@@ -1,4 +1,6 @@
 name: SAST
+permissions:
+  contents: read
 
 on:
   push
