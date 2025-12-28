@@ -1,7 +1,5 @@
 # Política de Seguridad
 
-## Versiones soportadas
-
 ## Versiones Soportadas
 
 Esta política de seguridad se aplica a la versión actual del proyecto. 
