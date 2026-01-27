@@ -15,7 +15,7 @@ jobs:
     if: (github.actor != 'dependabot[bot]')
     steps:
       # Fetch project source
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
 
       - run: semgrep ci
         env:
@@ -28,7 +28,7 @@ jobs:
     name: Scan gitLeaks
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
         with:
           fetch-depth: 0
       - uses: gitleaks/gitleaks-action@ff98106e4c7b2bc287b24eaf42907196329070c7         #v2.3.9
